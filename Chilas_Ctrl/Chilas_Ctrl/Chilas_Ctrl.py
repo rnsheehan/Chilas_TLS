@@ -28,7 +28,7 @@ def Chils_Ctrl_Hacking():
         # start by attempting to set up a serial connection between the PC and the Chilas TLS
         
         # parameters to be passed to the serial open command
-        ChilasPort = 'COM8' # this will have to be checked on your computer
+        ChilasPort = 'COM57' # this will have to be checked on your computer
         baudRate = 57600 # serial comms baud_rate
         readTimeout = 3 # timeout for reading data from the IBM4, units of second
         writeTimeout = 0.5 # timeout for writing data to the IBM4, units of second
@@ -41,35 +41,53 @@ def Chils_Ctrl_Hacking():
         # Check that the comms link was established correctly
         instr_obj.write(b'CMDL?\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
         response = instr_obj.read_until('\n',size=None) # what should the response be? 
+        print('\n',response)
         
         # Check that the comms link was established correctly
         instr_obj.write(b'*IDN?\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
         response = instr_obj.read_until('\n',size=None) # what should the response be? 
+        print('\n',response)
         
-        PLAY_WITH_LASER = False
+        PLAY_WITH_LASER = True
 
         if PLAY_WITH_LASER:
             # Switch on the laser system Using the following command
             instr_obj.write(b'SYST:STAT 1\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
             response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
         
             # Once this command executes successfully, switch the laser on
             instr_obj.write(b'LSR:STAT 1\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
             response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
         
             # Set the laser current level
             instr_obj.write(b'LSR:ILEV 75.6\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
             response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
         
             # Set the uHeater voltage to change its phase
             instr_obj.write(b'DRV:D 0 3.5\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
             response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
+            
+            # Set the uHeater voltage to change its phase
+            instr_obj.write(b'DRV:D 0 0.0\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
+            response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
+            
+            # Set the laser current level
+            instr_obj.write(b'LSR:ILEV 0.0\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
+            response = instr_obj.read_until('\n',size=None) # what should the response be? 
+            print('\n',response)
 
             # Switch the laser off
             instr_obj.write(b'LSR:STAT 0\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
+            print('\n',response)
         
             # Swtich the system off
             instr_obj.write(b'SYST:STAT 0\r\n') # commands sent to the Chilas TLS must end with CR+LF = '\r\n'
+            print('\n',response)
 
         instr_obj.close()
 
