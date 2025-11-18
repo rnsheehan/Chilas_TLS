@@ -30,8 +30,8 @@ def Chils_Ctrl_Hacking():
         # parameters to be passed to the serial open command
         ChilasPort = 'COM57' # this will have to be checked on your computer
         baudRate = 57600 # serial comms baud_rate
-        readTimeout = 3 # timeout for reading data from the IBM4, units of second
-        writeTimeout = 0.5 # timeout for writing data to the IBM4, units of second
+        readTimeout = 3 # timeout for reading data from the Chilas TLS, units of second
+        writeTimeout = 0.5 # timeout for writing data to the Chilas TLS, units of second
         instr_obj = None # assign a default argument to the instrument object
         
         instr_obj = serial.Serial(port = ChilasPort, baudrate = baudRate, timeout = readTimeout, write_timeout = writeTimeout, stopbits = serial.STOPBITS_ONE, parity = serial.PARITY_NONE)
@@ -54,7 +54,7 @@ def Chils_Ctrl_Hacking():
             print('\n',response)
             # response in this case should be b'0 Chilas BV,XMod Laser Controller v242,0012022190046,1.64\r\n'
         
-            PLAY_WITH_LASER = False
+            PLAY_WITH_LASER = True
 
             if PLAY_WITH_LASER:
                 # Switch on the laser system Using the following command
