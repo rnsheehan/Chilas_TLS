@@ -183,4 +183,4 @@ cython_debug/
 # other things to be ignored
 *.vsidx
 *.suo
-*DocumentLayout.json
+*DocumentLayout*.json
